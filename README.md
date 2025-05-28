@@ -6,4 +6,4 @@
 
 ## Xing Gao(xingg5@illinois.edu)
 
-This is an Interesting RAG system that we are working on. It is not going to be a very difficult on.
+This is an Interesting RAG system that we are working on. It is not going to be a very difficult one.
