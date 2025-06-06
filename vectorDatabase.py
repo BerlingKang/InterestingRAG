@@ -71,6 +71,13 @@ class vector_Database:
         self.dimension = dimension
         return self.base_index, self.dimension
 
+    def __check_model_name(self, model_name):
+        if model_name is None:
+            model = "bert-base-uncased"
+        else:
+            model = model_name
+        return model
+
     def build_index(self, text:list, **kwargs):
         """
         function for building the index file
@@ -79,11 +86,9 @@ class vector_Database:
         :return:
         """
         model_name = kwargs.get("model_name")
-        if model_name is None:
-            vectors = self.__transform(text, "bert-base-uncased")
-        else:
-            vectors = self.__transform(text, model_name)
+        model = self.__check_model_name(model_name)
 
+        vectors = self.__transform(text, model)
         dimension = vectors[0].shape[1]
         index, _ = self.__build_index(dimension)
 
@@ -114,11 +119,9 @@ class vector_Database:
         :return:
         """
         model_name = kwargs.get("model_name")
-        if model_name is None:
-            vectors = self.__transform(text, "bert-base-uncased")
-        else:
-            vectors = self.__transform(text, model_name)
+        model = self.__check_model_name(model_name)
 
+        vectors = self.__transform(text, model)
         if len(vectors) != len(identity):
             raise ValueError(f"input text length {len(vectors)} does not equals to identity length {len(identity)}")
 
@@ -150,10 +153,7 @@ class vector_Database:
         :return: None
         """
         model_name = kwargs.get("model_name")
-        if model_name is None:
-            model = "bert-base-uncased"
-        else:
-            model = model_name
+        model = self.__check_model_name(model_name)
 
         vectors = self.transform_word_to_vector(text, model)
 
@@ -185,6 +185,19 @@ class vector_Database:
         """
         return None
 
-    def retrieve(self, **kwargs):
-        # TODO: due to the ID problem, this part needs to be rewritten.
-        return None
+    def retrieve(self, text:str, top_k=3, **kwargs):
+        """
+        The function for retrieve the result.
+        TODO: due to the ID problem, this part needs to be rewritten.
+        TODO: this function needs to be tested,
+        :param text:
+        :param top_k:
+        :param kwargs:
+        :return:
+        """
+        model_name = kwargs.get("model_name")
+        model = self.__check_model_name(model_name)
+
+        vector = self.__transform(text, model)
+        distances, ids = self.base_index.search(vector, top_k)
+        return distances, ids
