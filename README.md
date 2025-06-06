@@ -2,7 +2,7 @@
 
 ## Author(contact): 
 
-##Zhanchen Kang(zk11@illinois.edu),
+## Zhanchen Kang(zk11@illinois.edu),
 
 ## Xing Gao(xingg5@illinois.edu)
 
