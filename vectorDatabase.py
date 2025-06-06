@@ -188,8 +188,8 @@ class vector_Database:
     def retrieve(self, text:str, top_k=3, **kwargs):
         """
         The function for retrieve the result.
-        TODO: due to the ID problem, this part needs to be rewritten.
-        TODO: this function needs to be tested,
+        TODO: due to the ID problem, this part needs to be rewritten. 6/6/2025
+        TODO: this function needs to be tested. 6/6/2025
         :param text:
         :param top_k:
         :param kwargs:
